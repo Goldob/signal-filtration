@@ -1,0 +1,12 @@
++----------------+------------------------------+-------+-------+
+|Imiê i nazwisko |Adam Gotlib                   |Grupa  |AR-121 |
++----------------+------------------------------+-------+-------+
+|Prowadz±cy      |Damian Suski                                  |
++----------------+----------------------------------------------+
+|Temat projektu  |Filtracja sygna³u w dziedzinie czêstotliwo¶ci |
++----------------+----------------------------------------------+
+
+* 1. Opis projektu
+* 2. Opis formatu danych wej¶ciowych/wyj¶ciowych
+* 3. Sieæ dzia³añ interfejsu
+* 4. Sieci dzia³añ najwa¿niejszych algorytmów
