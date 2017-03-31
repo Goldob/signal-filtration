@@ -1,4 +1,8 @@
 # Tymczasowe pliki Emacsa
-
 *#*
 *~
+
+# Wygenerowane pliki dokumentacji
+*.png
+*.html
+*.tex
