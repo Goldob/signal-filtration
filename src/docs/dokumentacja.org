@@ -6,7 +6,80 @@
 |Temat projektu  |Filtracja sygna³u w dziedzinie czêstotliwo¶ci |
 +----------------+----------------------------------------------+
 
-* 1. Opis projektu
-* 2. Opis formatu danych wej¶ciowych/wyj¶ciowych
-* 3. Sieæ dzia³añ interfejsu
-* 4. Sieci dzia³añ najwa¿niejszych algorytmów
+* Opis projektu
+  Celem projektu jest implementacja algorytmu filtrowania sygna³u w dziedzinie czêstotliwo¶ci.
+
+  Program wystêpowa³ bêdzie w dwóch wersjach: tekstowej oraz graficznej. W pierwszej z nich bêdzie on mia³ minimalistyczn± formê,
+  zgodn± z zasadami [[https://en.wikipedia.org/wiki/Unix_philosophy][Filozofii Unixa]]. Nie przewiduje siê interakcji z u¿ytkownikiem - potrzebne do dzia³ania parametry zostan± mu przekazane
+  przy uruchomieniu poprzez argumenty wiersza poleceñ, a od razu po wykonaniu zadania zakoñczy on swoje dzia³anie.
+
+  Wersja graficzna natomiast bêdzie reagowa³a na czynno¶ci u¿ytkownika oraz umo¿liwia³a podgl±d zmodyfikowanego sygna³u przed jego zapisaniem do pliku.
+
+* Opis formatu danych wej¶ciowych/wyj¶ciowych
+  Program operuje na plikach [[https://en.wikipedia.org/wiki/WAV][Waveform Audio File Format]].
+
+** Dane wej¶ciowe
+   W celu wywo³ania programu, nale¿y podaæ ¶cie¿kê do pliku z sygna³em wej¶ciowym, ¶cie¿kê do zapisania pliku
+   po przeprowadzeniu filtracji, wybrany rodzaj filtra oraz parametry dla algorytmu:
+
+   * w przypadku filtru [[https://en.wikipedia.org/wiki/High-pass_filter][górnoprzepustowego]], nale¿y podaæ doln± granicê czêstotliwo¶ci;
+   * w przypadku filtru [[https://en.wikipedia.org/wiki/Low-pass_filter][dolnoprzepustowego]], nale¿y podaæ górn± granicê czêstotliwo¶ci;
+   * w przypadku filtru [[https://en.wikipedia.org/wiki/Band-pass_filter][¶rodkowoprzepustowego]] oraz [[https://en.wikipedia.org/wiki/Band-stop_filter][¶rodkowozaporowego]], nale¿y podaæ obie czêstotliwo¶ci graniczne.
+
+** Dane wyj¶ciowe
+   Rezultatem wykonania programu jest zapisanie przefiltrowanego pliku falowego we wskazanej przez u¿ytkownika lokalizacji.
+
+   Dodatkowo przewiduje siê drukowanie postêpu wykonania programu na strumieñ /STDOUT/.
+   W przypadku napotkania b³êdu, jak niepoprawne kodowanie pliku lub niew³a¶ciwy format parametrów programu,
+   w³a¶ciwa informacja zostanie wydrukowana na /STDERR/, a program zakoñczy wykonywanie z niezerowym kodem wyj¶cia.
+
+* Sieæ dzia³añ interfejsu
+
+  W podstawowej wersji programu interfejs wszystkie parametry do programu podawane bêd± przez pow³okê tekstow±.
+
+  W graficznej wersji programu interfejs u¿ytkownika prezentuje siê nastêpuj±co:
+  #+begin_src plantuml :file interface.png
+    start
+    repeat
+      partition Wczytywanie {
+        :Wczytaj ¶cie¿kê pliku wej¶ciowego;
+        #LightBlue:Wy¶wietl oryginalny sygna³;
+      }
+      #LightGray:Powtórz := tak;
+      repeat
+        partition Filtracja {
+          :Wczytaj parametry algorytmu;
+          :Przeprowad¼ filtracjê sygna³u;
+          #LightBlue:Wy¶wietl zmodyfikowany sygna³;
+        }
+        :Akcja u¿ytkownika;
+          if (Zapisz?) then (tak)
+            partition Zapis {
+              :Wczytaj ¶cie¿kê pliku wyj¶ciowego;
+              :Zapisz plik;
+            }
+          elseif (Anuluj?) then (tak)
+            #LightGray:Powtórz := nie;
+          elseif (Zakoñcz?) then (tak)
+            end
+          else (Powtórz)
+          endif;
+      repeat while (Powtórz?) is (tak)
+  #+end_src
+ 
+
+
+* Sieci dzia³añ najwa¿niejszych algorytmów
+
+  Ca³o¶c programu opiera siê na algorytmie filtrowania czêstotliwo¶ci. Mimo istniania wielu wariantów
+  tego filtra, ca³y proces mo¿na upro¶ciæ do nastêpuj±cej postaci:
+
+  #+begin_src plantuml :file algorithm.png
+    start
+    :Transofmacja Fouriera;
+    :Filtrowanie czêstotliwo¶ci;
+    :Odwrotna transformacja Fouriera;
+    end
+  #+end_src
+
+  Poszczególne filtry ró¿niæ siê bêd± jedynie drugim etapem, czyli sposobem wyboru, które czêstotliwo¶ci nale¿y wyci±æ.
