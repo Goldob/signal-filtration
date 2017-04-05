@@ -1,86 +1,51 @@
-#+TITLE: Zasady programowania strukturalnego II – projektowanie
-#+OPTIONS: toc:nil
-
 +----------------+------------------------------+-------+-------+
-|Imiê i nazwisko |Adam Gotlib                   |Grupa  |AR-121 |
+|ImiÄ™ i nazwisko |Adam Gotlib                   |Grupa  |AR-121 |
 +----------------+------------------------------+-------+-------+
-|Prowadz¹cy      |Damian Suski                                  |
+|ProwadzÄ…cy      |Damian Suski                                  |
 +----------------+----------------------------------------------+
-|Temat projektu  |Filtracja sygna³u w dziedzinie czêstotliwoœci |
+|Temat projektu  |Filtracja sygnaÅ‚u w dziedzinie czÄ™stotliwoÅ›ci |
 +----------------+----------------------------------------------+
 
 * Opis projektu
-  Celem projektu jest implementacja algorytmu filtrowania sygna³u w dziedzinie czêstotliwoœci.
+  Celem projektu jest implementacja algorytmu filtrowania sygnaÅ‚u w dziedzinie czÄ™stotliwoÅ›ci.
 
-  Program wystêpuje w dwóch wersjach: tekstowej oraz graficznej. W pierwszej z nich zak³ada siê minimalistyczn¹ formê,
-  zgodn¹ z zasadami [[https://en.wikipedia.org/wiki/Unix_philosophy][Filozofii Unixa]]. Nie przewiduje siê interakcji z u¿ytkownikiem - potrzebne do dzia³ania parametry zostan¹ przekazane
-  przy uruchomieniu poprzez argumenty wiersza poleceñ, a od razu po wykonaniu zadania program zakoñczy swoje dzia³anie.
+  Program wystÄ™powaÅ‚ bÄ™dzie w dwÃ³ch wersjach: tekstowej oraz graficznej. W pierwszej z nich bÄ™dzie on miaÅ‚ minimalistycznÄ… formÄ™,
+  zgodnÄ… z zasadami [[https://en.wikipedia.org/wiki/Unix_philosophy][Filozofii Unixa]]. Nie przewiduje siÄ™ interakcji z uÅ¼ytkownikiem - potrzebne do dziaÅ‚ania parametry zostanÄ… mu przekazane
+  przy uruchomieniu poprzez argumenty wiersza poleceÅ„, a od razu po wykonaniu zadania zakoÅ„czy on swoje dziaÅ‚anie.
 
-  Wersja graficzna natomiast reaguje na czynnoœci u¿ytkownika oraz umo¿liwia podgl¹d zmodyfikowanego sygna³u przed jego zapisaniem do pliku.
-
-* Opis formatu danych wejœciowych/wyjœciowych
+  Wersja graficzna natomiast bÄ™dzie reagowaÅ‚a na czynnoÅ›ci uÅ¼ytkownika oraz umoÅ¼liwiaÅ‚a podglÄ…d zmodyfikowanego sygnaÅ‚u przed jego zapisaniem do pliku.
+  
+* Opis formatu danych wejÅ›ciowych/wyjÅ›ciowych
   Program operuje na plikach [[https://en.wikipedia.org/wiki/WAV][Waveform Audio File Format]].
 
-** Dane wejœciowe
-   W celu wywo³ania programu, nale¿y podaæ œcie¿kê do pliku z sygna³em wejœciowym, œcie¿kê do zapisania pliku
+** Dane wejÅ›ciowe
+   W celu wywolania programu, naleÅ¼y podaÄ‡ Å›cieÅ¼kÄ™ do pliku z sygnaÅ‚em wejÅ›ciowym, Å›cieÅ¼kÄ™ do zapisania pliku
    po przeprowadzeniu filtracji, wybrany rodzaj filtra oraz parametry dla algorytmu:
 
-   * w przypadku filtru [[https://en.wikipedia.org/wiki/High-pass_filter][górnoprzepustowego]], nale¿y podaæ doln¹ granicê czêstotliwoœci;
-   * w przypadku filtru [[https://en.wikipedia.org/wiki/Low-pass_filter][dolnoprzepustowego]], nale¿y podaæ górn¹ granicê czêstotliwoœci;
-   * w przypadku filtru [[https://en.wikipedia.org/wiki/Band-pass_filter][œrodkowoprzepustowego]] oraz [[https://en.wikipedia.org/wiki/Band-stop_filter][œrodkowozaporowego]], nale¿y podaæ obie czêstotliwoœci graniczne.
+   * w przypadku filtru [[https://en.wikipedia.org/wiki/High-pass_filter][gÃ³rnoprzepustowego]], naleÅ¼y podaÄ‡ dolnÄ… granicÄ™ czÄ™stotliwoÅ›ci;
+   * w przypadku filtru [[https://en.wikipedia.org/wiki/Low-pass_filter][dolnoprzepustowego]], naleÅ¼y podaÄ‡ gÃ³rnÄ… granicÄ™ czÄ™stotliwoÅ›ci;
+   * w przypadku filtru [[https://en.wikipedia.org/wiki/Band-pass_filter][Å›rodkowoprzepustowego]] oraz [[https://en.wikipedia.org/wiki/Band-stop_filter][Å›rodkowozaporowego]], naleÅ¼y podaÄ‡ obie czÄ™stotliwoÅ›ci graniczne.
+     
+** Dane wyjÅ›ciowe
+   Rezultatem wykonania programu jest zapisanie przefiltrowanego pliku falowego we wskazanej przez uÅ¼ytkownika lokalizacji.
 
-** Dane wyjœciowe
-   Rezultatem wykonania programu jest zapisanie przefiltrowanego pliku falowego we wskazanej przez u¿ytkownika lokalizacji.
+   Dodatkowo przewiduje siÄ™ drukowanie postÄ™pu wykonania programu na strumieÅ„ /STDOUT/.
+   W przypadku napotkania bÅ‚Ä™du, jak niepoprawne kodowanie pliku lub niewÅ‚aÅ›ciwy format parametrÃ³w programu,
+   wÅ‚aÅ›ciwa informacja zostanie wydrukowana na /STDERR/, a program zakoÅ„czy wykonywanie z niezerowym kodem wyjÅ›cia.
 
-   Dodatkowo przewiduje siê drukowanie postêpu wykonania programu na strumieñ /STDOUT/.
-   W przypadku napotkania b³êdu, jak niepoprawne kodowanie pliku lub niew³aœciwy format parametrów programu,
-   w³aœciwa informacja zostanie wydrukowana na /STDERR/, a program zakoñczy wykonywanie z niezerowym kodem wyjœcia.
+* SieÄ‡ dziaÅ‚aÅ„ interfejsu
 
-* Sieæ dzia³añ interfejsu
+  W podstawowej wersji programu wszystkie parametry podawane bÄ™dÄ… jako argumenty powÅ‚oki tekstowej.
 
-  Jak opisano wczeœniej, interaktywny interfejs dotyczy jedynie graficznej wersji programu. Jego schemat prezentuje siê nastêpuj¹co:
+  W graficznej wersji programu interfejs uÅ¼ytkownika prezentuje siÄ™ nastÄ™pujÄ…co:
 
-  #+begin_src plantuml :file interface.png
-    start
-    repeat
-      partition Wczytywanie {
-        :Wczytaj œcie¿kê pliku wejœciowego;
-        #LightBlue:Wyœwietl oryginalny sygna³;
-      }
-      #LightGray:Powtórz := tak;
-      repeat
-        partition Filtracja {
-          :Wczytaj parametry algorytmu;
-          :PrzeprowadŸ filtracjê sygna³u;
-          #LightBlue:Wyœwietl zmodyfikowany sygna³;
-        }
-        :Akcja u¿ytkownika;
-          if (Zapisz?) then (tak)
-            partition Zapis {
-              :Wczytaj œcie¿kê pliku wyjœciowego;
-              :Zapisz plik;
-            }
-          elseif (Anuluj?) then (tak)
-            #LightGray:Powtórz := nie;
-          elseif (Zakoñcz?) then (tak)
-            end
-          else (Powtórz)
-          endif;
-      repeat while (Powtórz?) is (tak)
-  #+end_src
- 
+  [[./img/interfejs.png]]
 
+* Sieci dziaÅ‚aÅ„ najwaÅ¼niejszych algorytmÃ³w
 
-* Sieci dzia³añ najwa¿niejszych algorytmów
+  CaÅ‚oÅ›Ä‡ programu opiera siÄ™ na algorytmie filtrowania czÄ™stotliwoÅ›ci. Mimo istniania wielu wariantÃ³w
+  tego filtra, caÅ‚y proces moÅ¼na uproÅ›ciÄ‡ do nastÄ™pujÄ…cej postaci:
 
-  Mimo istnienia kilku wariantów filtra, ca³oœæ g³ównego algorytmu mo¿na uproœciæ do nastêpuj¹cej postaci:
+  [[./img/algorytm.png]]
 
-  #+begin_src plantuml :file algorithm.png
-    start
-    :Transofmacja Fouriera;
-    :Filtrowanie czêstotliwoœci;
-    :Odwrotna transformacja Fouriera;
-    end
-  #+end_src
-
-  Poszczególne filtry ró¿niæ siê bêd¹ jedynie drugim etapem, czyli sposobem wyboru, które czêstotliwoœci nale¿y wyci¹æ.
+  PoszczegÃ³lne filtry rÃ³Å¼niÄ‡ siÄ™ bÄ™dÄ… jedynie drugim etapem, czyli sposobem wyboru, ktÃ³re czÄ™stotliwoÅ›ci naleÅ¼y wyciÄ…Ä‡.

@@ -1,0 +1,7 @@
+@startuml
+  start
+  :Transformacja Fouriera;
+  :Filtrowanie częstotliwości;
+  :Odwrotna transformacja Fouriera;
+  end
+@enduml
