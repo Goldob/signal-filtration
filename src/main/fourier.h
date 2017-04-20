@@ -7,8 +7,8 @@ namespace signal {
     int n;
     double * evenCoefficients;
     double * oddCoefficients;
-  }
-  
+  };
+
   void fourierTransform(const signal in_signal,
 			const freq maxFreq,
 			fourierSeries& out_fourierSeries);
