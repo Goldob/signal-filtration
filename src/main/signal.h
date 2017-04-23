@@ -2,7 +2,9 @@
 #ifndef SIGNAL_INCLUDED
 #define SIGNAL_INCLUDED
 
-namespace signal {
+#include <string>
+
+namespace sig {
   typedef double freq;
 
   struct signal {
@@ -11,11 +13,11 @@ namespace signal {
     double * samples;
   };
 
-  void readSignalFromFile(const string fileName,
-			  signal& out_signal);
+  void readSignalFromFile (const std::string fileName,
+                           signal& out_signal);
   
-  void saveSignalToFile(const string fileName,
-			const signal in_signal);
+  void saveSignalToFile (const std::string fileName,
+                         const signal in_signal);
 }
 
 #endif /* !SIGNAL_INCLUDED */
