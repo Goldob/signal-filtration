@@ -9,8 +9,12 @@ Project {
         name: 'Prototyp'
 
         files: [
+            "src/core/list.h",
+        ].concat([
+            "src/core/list.cpp",
+        ].concat([
             'src/cli.cpp'
-        ].concat(Config.CORE_FILES)
+        ].concat(Config.CORE_FILES)))
 
         cpp.includePaths: [ Config.CORE_PATH ]
 

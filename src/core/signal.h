@@ -4,13 +4,15 @@
 
 #include <string>
 
+#include "list.h"
+
 namespace sig {
   typedef double freq;
+  typedef double sample;
 
   struct signal {
     freq samplingFreq;
-    int samplesNum;
-    double * samples;
+    List<sample> samples;
   };
 
   void readSignalFromFile (const std::string fileName,
