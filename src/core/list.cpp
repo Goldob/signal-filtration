@@ -10,23 +10,24 @@ namespace sig {
     }
 
     template <class T> void List<T>::push (T item) {
-        Element new_element(item, NULL);
+        Element * new_element = new Element(item, NULL);
 
         if (counter == 0) {
-            head = tail = &new_element;
+            head = new_element;
+            tail = new_element;
         } else {
-            tail->next = &new_element;
-            tail = &new_element;
+            tail->next = new_element;
+            tail = new_element;
         }
 
         counter++;
     }
 
-    template <class T> int List<T>::length () {
+    template <class T> int List<T>::length () const {
         return counter;
     }
 
-    template <class T> void List<T>::forEach (void f(T)) {
+    template <class T> void List<T>::forEach (item_cb f) const {
         Element * current = head;
         while (current != NULL) {
             f(current->item);

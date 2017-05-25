@@ -1,8 +1,12 @@
 #ifndef LIST_INCLUDED
 #define LIST_INCLUDED
 
+#include <functional>
+
 namespace sig {
     template <class T> class List {
+        typedef std::function<void (T)> item_cb;
+
         struct Element {
             T item;
             Element * next;
@@ -20,8 +24,8 @@ namespace sig {
         public:
             List();
             void push (T);
-            int length ();
-            void forEach (void f(T));
+            int length () const;
+            void forEach (item_cb) const;
     };
 
     template class List<double>;
