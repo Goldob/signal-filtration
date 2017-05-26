@@ -40,5 +40,9 @@ Project {
     // TODO Zbuduj dokumentację
     Product {
         name: 'Dokumentacja'
+
+        files: [
+            "src/core/dsp.h"
+        ]
     }
 }

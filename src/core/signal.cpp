@@ -7,7 +7,7 @@
 
 #include "signal.h"
 
-namespace sig {
+namespace dsp {
     void readSignalFromFile (const std::string fileName,
                              signal& out_signal) {
         std::ifstream ifs(fileName.c_str());

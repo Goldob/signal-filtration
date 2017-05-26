@@ -2,7 +2,7 @@
 
 #include "list.h"
 
-namespace sig {
+namespace dsp {
     template <class T> List<T>::List () {
         head = NULL;
         tail = NULL;

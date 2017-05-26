@@ -55,14 +55,14 @@ int main () {
                parseFilterCode(filterCode, filterType),
                ERR_INVALID_FILTER);
 
-    sig::signal in_signal;
-    sig::signal out_signal;
+    dsp::signal in_signal;
+    dsp::signal out_signal;
 
     // Wczytaj sygnał wejściowy z pliku
-    sig::readSignalFromFile(in_fileName, in_signal);
+    dsp::readSignalFromFile(in_fileName, in_signal);
 
-    sig::freq freq_lowerBound;
-    sig::freq freq_upperBound;
+    dsp::freq freq_lowerBound;
+    dsp::freq freq_upperBound;
 
     // Wywołaj odpowiedni algorytm w zależności od wybranego filtra
     switch (filterType) {
@@ -72,7 +72,7 @@ int main () {
                    freq_upperBound > 0,
                    ERR_NONPOSITIVE_FREQ);
 
-        sig::lowPassFilter(in_signal,
+        dsp::lowPassFilter(in_signal,
                            freq_upperBound,
                            out_signal);
         break;
@@ -82,7 +82,7 @@ int main () {
                    freq_lowerBound > 0,
                    ERR_NONPOSITIVE_FREQ);
 
-        sig::highPassFilter(in_signal,
+        dsp::highPassFilter(in_signal,
                             freq_lowerBound,
                             out_signal);
         break;
@@ -97,7 +97,7 @@ int main () {
                    freq_upperBound > 0,
                    ERR_NONPOSITIVE_FREQ);
 
-        sig::bandPassFilter(in_signal,
+        dsp::bandPassFilter(in_signal,
                             freq_lowerBound,
                             freq_upperBound,
                             out_signal);
@@ -113,7 +113,7 @@ int main () {
                    freq_upperBound > 0,
                    ERR_NONPOSITIVE_FREQ);
 
-        sig::bandStopFilter(in_signal,
+        dsp::bandStopFilter(in_signal,
                             freq_lowerBound,
                             freq_upperBound,
                             out_signal);
@@ -121,5 +121,5 @@ int main () {
     }
 
     // Zapisz sygnał wyjściowy do pliku
-    sig::saveSignalToFile(out_fileName, out_signal);
+    dsp::saveSignalToFile(out_fileName, out_signal);
 }

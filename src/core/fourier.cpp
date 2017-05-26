@@ -2,7 +2,7 @@
 
 #include "fourier.h"
 
-namespace sig {
+namespace dsp {
     inline double basisSin (int i, int k, int N) {
         return std::sin(2 * M_PI * k * i / N);
     }

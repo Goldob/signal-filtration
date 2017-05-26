@@ -6,20 +6,33 @@
 
 #include "list.h"
 
-namespace sig {
-  typedef double freq;
-  typedef double sample;
+namespace dsp {
+    typedef double freq;    //!< Częstotliwość wyrażona w hercach.
+    typedef double sample;  //!< Ogólnie rozumiana próbka sygnału. Może byc interpretowana dowolnie w zależnosci od zastosowania.
 
-  struct signal {
-    freq samplingFreq;
-    List<sample> samples;
-  };
+    /*!
+     * \brief Struktura \b signal, będąca standardową reprezentacją sygnału w domenie czasu.
+     */
+    struct signal {
+        freq samplingFreq;      //!< Częstotliowość próbkowania - ilość próbek na sekundę.
+        List<sample> samples;   //!< Lista wszystkich próbek sygnału.
+    };
 
-  void readSignalFromFile (const std::string fileName,
-                           signal& out_signal);
+    /*!
+     * \brief Wczytaj sygnał z pliku o podanej nazwie.
+     * \param fileName Nazwa pliku.
+     * \param out_signal Wczytany sygnał, przekazany przez referencję.
+     */
+    void readSignalFromFile (const std::string fileName,
+                             signal& out_signal);
   
-  void saveSignalToFile (const std::string fileName,
-                         const signal in_signal);
+    /*!
+     * \brief Zapisz sygnał do pliku o podanej nazwie.
+     * \param fileName Nazwa pliku.
+     * \param in_signal Sygnał do zapisania.
+     */
+    void saveSignalToFile (const std::string fileName,
+                           const signal in_signal);
 }
 
 #endif /* !SIGNAL_INCLUDED */
