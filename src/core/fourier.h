@@ -1,3 +1,5 @@
+#define NULL nullptr
+
 /* File fourier.h */
 #ifndef FOURIER_INCLUDED
 #define FOURIER_INCLUDED
@@ -5,17 +7,17 @@
 #include "signal.h"
 
 namespace sig {
-  struct fourierSeries {
+  struct signal_freqDomain {
+    freq samplingFreq;
     int n;
-    double * evenCoefficients;
-    double * oddCoefficients;
+    double * realPart   = NULL; // amplitudy sinusów
+    double * imPart     = NULL; // amplitudy cosinusów
   };
 
   void fourierTransform (const signal in_signal,
-                         const freq maxFreq,
-                         fourierSeries& out_fourierSeries);
+                         signal_freqDomain& out_signal);
 
-  void inverseFourierTransform (const fourierSeries in_fourierSeries,
+  void inverseFourierTransform (const signal_freqDomain in_signal,
                                 signal& out_signal);
 }
 

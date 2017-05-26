@@ -121,5 +121,5 @@ int main () {
     }
 
     // Zapisz sygnał wyjściowy do pliku
-    sig::saveSignalToFile(out_fileName, in_signal /* TODO out_signal */);
+    sig::saveSignalToFile(out_fileName, out_signal);
 }
