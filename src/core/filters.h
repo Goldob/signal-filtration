@@ -9,7 +9,7 @@ namespace dsp {
      * \brief Przeprowadź filtrację niskoprzepustową zadanego sygnału.
      *
      * \param in_signal Sygnał wejściowy.
-     * \param freq_upperBound Górna granica zakresu przepuszczanych czśstotliwości.
+     * \param freq_upperBound Górna granica zakresu przepuszczanych częstotliwości.
      * \param out_signal Sygnał wyjściowy po filtracji, przekazany przez referencję.
      */
     void lowPassFilter (const signal in_signal,
