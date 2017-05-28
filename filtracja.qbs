@@ -6,21 +6,36 @@ Project {
     name: 'Filtracja'
 
     Application {
-        name: 'Prototyp'
+        name: 'Program konsolowy'
 
-        files: [
-            "src/core/fourier.cpp",
-        ].concat([
-            "src/core/list.h",
-        ].concat([
-            "src/core/list.cpp",
-        ].concat([
-            'src/cli.cpp'
-        ].concat(Config.CORE_FILES))))
+        files: [ 'src/cli.cpp' ]
+                    .concat(Config.CORE_FILES)
 
         cpp.includePaths: [ Config.CORE_PATH ]
 
         Depends { name: 'cpp' }
+    }
+
+    Application {
+        name: 'Program graficzny'
+
+        files: [
+            'src/gui/filtracja.cpp',
+            'src/gui/filtracja.h',
+            'src/gui/about_dialog.cpp',
+            'src/gui/about_dialog.h',
+            'src/gui/main.cpp',
+            'res/ui/filtracja.ui',
+            'res/ui/about_dialog.ui'
+        ].concat(Config.CORE_FILES)
+
+        cpp.includePaths: [
+            'src/gui',
+            Config.CORE_PATH
+        ]
+
+        Depends { name: 'cpp' }
+        Depends { name: 'Qt.widgets' }
     }
 
     // TODO Wykonaj testy

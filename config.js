@@ -7,15 +7,21 @@
 var CORE_PATH = 'src/core'
 
 //==============================================================================
-// SOURCES
+// HEADERS & SOURCES
 //==============================================================================
 
 var CORE_FILES = prependAll([
+    /* headers */
     'filters.h',
     'fourier.h',
     'signal.h',
+    'list.h',
+
+    /* sources */
     'filters.cpp',
-    'signal.cpp'
+    'fourier.cpp',
+    'signal.cpp',
+    'list.cpp'
 ], CORE_PATH)
 
 //==============================================================================
