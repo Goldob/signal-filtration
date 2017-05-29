@@ -19,6 +19,7 @@ Project {
         ].concat(Config.CORE_FILES))))
 
         cpp.includePaths: [ Config.CORE_PATH ]
+        cpp.cxxLanguageVersion: 'c++11'
 
         Depends { name: 'cpp' }
     }
