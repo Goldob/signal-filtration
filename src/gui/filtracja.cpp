@@ -8,6 +8,9 @@
 
 Filtracja::Filtracja (QWidget * parent) : QMainWindow(parent) {
     m_ui->setupUi(this);
+
+    connect(m_ui->welcomeScreen, &WelcomeScreen::fileDropped,
+            this, &Filtracja::readFile);
 }
 
 Filtracja::~Filtracja () {
