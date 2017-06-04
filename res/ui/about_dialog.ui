@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>323</width>
-    <height>145</height>
+    <height>142</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -36,6 +36,13 @@
      </property>
      <property name="text">
       <string>Projekt wykonany w ramach przedmiotu ZAP2</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLabel" name="label_6">
+     <property name="text">
+      <string/>
      </property>
     </widget>
    </item>
