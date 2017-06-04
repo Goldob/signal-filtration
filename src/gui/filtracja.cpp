@@ -11,6 +11,9 @@ Filtracja::Filtracja (QWidget * parent) : QMainWindow(parent) {
 
     connect(m_ui->welcomeScreen, &WelcomeScreen::fileDropped,
             this, &Filtracja::readFile);
+
+    connect(m_ui->filterControlPanel, &FilterControlPanel::filterSet,
+            this, &Filtracja::filterSignal);
 }
 
 Filtracja::~Filtracja () {
@@ -99,12 +102,11 @@ void Filtracja::onFileReadSuccess (QString fileName, dsp::signal output) {
     }
 
     m_fileName = fileName;
+    m_input = output;
+    m_output = output;
 
-    m_filterControlPanel->reset(output);
+    m_ui->filterControlPanel->reset(output);
     m_filterPreview = new FilterPreview(output, this);
-
-    //connect(m_filterControlPanel, &FilterControlPanel::filterSet,
-    //        this, &Filtracja::filterSignal); TODO
 
     m_ui->mainArea->addWidget(m_filterPreview);
     m_ui->mainArea->setCurrentWidget(m_filterPreview);
@@ -138,6 +140,7 @@ void Filtracja::onFileSaveFailure (QString errorMessage) {
 }
 
 void Filtracja::onSignalFiltered (dsp::signal output) {
+    m_output = output;
     m_filterPreview->updateOutput(output);
 
     m_filteringInProgress = false;

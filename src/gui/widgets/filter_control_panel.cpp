@@ -38,7 +38,7 @@ FilterControlPanel::FilterControlPanel (QWidget * parent) :
 }
 
 void FilterControlPanel::reset (dsp::signal input) {
-    // TODO
+    onFilterParametersChanged();
 }
 
 void FilterControlPanel::onFilterTypeChanged () {
@@ -62,6 +62,8 @@ void FilterControlPanel::onFilterTypeChanged () {
             toggleUpperBoundVisibility(true);
             break;
     }
+
+    onFilterParametersChanged();
 }
 
 void FilterControlPanel::toggleLowerBoundVisibility (bool visible) {
@@ -81,20 +83,29 @@ void FilterControlPanel::toggleUpperBoundVisibility (bool visible) {
 }
 
 void FilterControlPanel::onFilterParametersChanged () {
+    dsp::filter filter;
+
     int typeIndex = m_filterTypeCombo->currentIndex();
+
+    dsp::freq freq_lowerBound = m_lowerBoundSpinBox->value();
+    dsp::freq freq_upperBound = m_upperBoundSpinBox->value();
 
     switch (typeIndex) {
         case LOW_PASS_INDEX:
-            // TODO
+            filter = dsp::lowPassFilter(freq_upperBound);
             break;
         case HIGH_PASS_INDEX:
-            // TODO
+            filter = dsp::highPassFilter(freq_lowerBound);
             break;
         case BAND_PASS_INDEX:
-            // TODO
+            filter = dsp::bandPassFilter(freq_lowerBound,
+                                         freq_upperBound);
             break;
         case BAND_STOP_INDEX:
-            // TODO
+            filter = dsp::bandStopFilter(freq_lowerBound,
+                                         freq_upperBound);
             break;
     }
+
+    emit filterSet(filter);
 }

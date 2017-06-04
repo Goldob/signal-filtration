@@ -50,7 +50,6 @@ class Filtracja : public QMainWindow {
         Ui::Filtracja       *   m_ui                    = new Ui::Filtracja;
         AboutDialog         *   m_aboutDialog           = new AboutDialog(this);
 
-        FilterControlPanel  *   m_filterControlPanel    = nullptr;
         FilterPreview       *   m_filterPreview         = nullptr;
 
         QThreadPool         *   m_globalThreadPool      = QThreadPool::globalInstance();

@@ -7,7 +7,7 @@ namespace dsp {
     }
 
     filter lowPassFilter (const freq freq_upperBound) {
-        return [&](signal in_signal) -> signal {
+        return [=](signal in_signal) -> signal {
             dsp::signal_freqDomain signal_freq;
             dsp::fourierTransform(in_signal, signal_freq);
 
@@ -26,7 +26,7 @@ namespace dsp {
     }
 
     filter highPassFilter (const freq freq_lowerBound) {
-        return [&](signal in_signal) -> signal {
+        return [=](signal in_signal) -> signal {
             dsp::signal_freqDomain signal_freq;
             dsp::fourierTransform(in_signal, signal_freq);
 
@@ -46,7 +46,7 @@ namespace dsp {
 
     filter bandPassFilter (const freq freq_lowerBound,
                            const freq freq_upperBound) {
-        return [&](signal in_signal) -> signal {
+        return [=](signal in_signal) -> signal {
             dsp::signal_freqDomain signal_freq;
             dsp::fourierTransform(in_signal, signal_freq);
 
@@ -73,7 +73,7 @@ namespace dsp {
 
     filter bandStopFilter (const freq freq_lowerBound,
                            const freq freq_upperBound) {
-        return [&](signal in_signal) -> signal {
+        return [=](signal in_signal) -> signal {
             dsp::signal_freqDomain signal_freq;
             dsp::fourierTransform(in_signal, signal_freq);
 

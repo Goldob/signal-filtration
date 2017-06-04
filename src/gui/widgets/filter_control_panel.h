@@ -55,7 +55,7 @@ class FilterControlPanel : public QWidget {
         QLabel          * m_upperBoundHertzLabel    = new QLabel(HERTZ_LABEL);
 
     signals:
-        void filterSet                  (dsp::filter newFilter);
+        void filterSet                  (dsp::filter filter);
 };
 
 #endif /* !FILTER_CONTROL_PANEL_INCLUDED */

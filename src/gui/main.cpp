@@ -7,6 +7,8 @@
 int main (int argc, char *argv[])
 {
     qRegisterMetaType<dsp::signal>("dsp::signal");
+    qRegisterMetaType<dsp::filter>("dsp::filter");
+
     QApplication app(argc, argv);
 
     Filtracja filtracja;

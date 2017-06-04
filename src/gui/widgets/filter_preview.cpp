@@ -40,11 +40,11 @@ void FilterPreview::updateOutput (dsp::signal output) {
     encodeSignal(output, m_outputSeries);
 }
 
-void FilterPreview::encodeSignal (dsp::signal _signal, QLineSeries * series) {
+void FilterPreview::encodeSignal (dsp::signal signal, QLineSeries * series) {
     series->clear();
 
     int sample_num = 0;
-    _signal.samples.forEach([&](dsp::sample s) {
+    signal.samples.forEach([&](dsp::sample s) {
         series->append(sample_num++, s);
     });
 }
