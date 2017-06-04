@@ -34,7 +34,7 @@ class FilterControlPanel : public QWidget {
         FilterControlPanel              (QWidget * parent = nullptr);
 
     public slots:
-        void reset                      (dsp::signal input);
+        void reset                      ();
 
     private slots:
         void onFilterTypeChanged        ();

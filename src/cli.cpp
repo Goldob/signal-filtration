@@ -5,6 +5,8 @@
     cout << err << endl; \
 }
 
+#define EMPTY_STR ""
+
 #define DESC_IN_FILENAME "Sciezka pliku wejsciowego"
 #define DESC_OUT_FILENAME "Sciezka pliku wyjsciowego"
 #define DESC_FILTER_TYPE "Rodzaj filtra (lp, hp, bp, bs)"
@@ -45,8 +47,8 @@ int main () {
     string out_fileName;
     filter_type filterType;
 
-    READ_INPUT(in_fileName, DESC_IN_FILENAME, true, NULL);
-    READ_INPUT(out_fileName, DESC_OUT_FILENAME, true, NULL);
+    READ_INPUT(in_fileName, DESC_IN_FILENAME, true, EMPTY_STR);
+    READ_INPUT(out_fileName, DESC_OUT_FILENAME, true, EMPTY_STR);
 
     string filterCode;
     READ_INPUT(filterCode,

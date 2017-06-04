@@ -28,14 +28,6 @@ FilterPreview::~FilterPreview () {
     delete m_outputSeries;
 }
 
-void FilterPreview::showLoading () {
-    // TODO
-}
-
-void FilterPreview::hideLoading () {
-    // TODO
-}
-
 void FilterPreview::updateOutput (dsp::signal output) {
     encodeSignal(output, m_outputSeries);
 }

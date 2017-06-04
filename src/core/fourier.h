@@ -1,5 +1,3 @@
-#define NULL nullptr
-
 /* File fourier.h */
 #ifndef FOURIER_INCLUDED
 #define FOURIER_INCLUDED
@@ -12,10 +10,10 @@ namespace dsp {
    *        w dziedzinie częstotliwości.
    */
   struct signal_freqDomain {
-    freq samplingFreq;          //!< Częstotliwość próbkowania źródłowego sygnału.
-    int n;                      //!< Ilość dyskretnych częstotliowości, zależna bezpośrednio od ilości próbek źródłowego sygnału.
-    double * realPart   = NULL; //!< Amplitudy sinusów.
-    double * imPart     = NULL; //!< Amplitudy cosinusów.
+    freq samplingFreq;              //!< Częstotliwość próbkowania źródłowego sygnału.
+    int n;                          //!< Ilość dyskretnych częstotliowości, zależna bezpośrednio od ilości próbek źródłowego sygnału.
+    double * realPart   = nullptr;  //!< Amplitudy sinusów.
+    double * imPart     = nullptr;  //!< Amplitudy cosinusów.
   };
 
   /*!

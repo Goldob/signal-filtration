@@ -18,12 +18,10 @@ Filtracja::Filtracja (QWidget * parent) : QMainWindow(parent) {
 
 Filtracja::~Filtracja () {
     delete m_ui;
-
-    // TODO
 }
 
 void Filtracja::on_actionOpen_triggered () {
-    QString fileName = QFileDialog::getOpenFileName(this);
+    QString fileName = QFileDialog::getOpenFileName(this, "Otwórz plik");
 
     if (!fileName.isEmpty()) readFile(fileName);
 }
@@ -33,7 +31,7 @@ void Filtracja::on_actionSave_triggered () {
 }
 
 void Filtracja::on_actionSaveAs_triggered () {
-    QString fileName = QFileDialog::getSaveFileName(this);
+    QString fileName = QFileDialog::getSaveFileName(this, tr("Zapisz plik"));
 
     if (!fileName.isEmpty()) {
         m_fileName = fileName;
@@ -105,7 +103,7 @@ void Filtracja::onFileReadSuccess (QString fileName, dsp::signal output) {
     m_input = output;
     m_output = output;
 
-    m_ui->filterControlPanel->reset(output);
+    m_ui->filterControlPanel->reset();
     m_filterPreview = new FilterPreview(output, this);
 
     m_ui->mainArea->addWidget(m_filterPreview);

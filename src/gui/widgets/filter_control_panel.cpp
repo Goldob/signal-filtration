@@ -37,8 +37,16 @@ FilterControlPanel::FilterControlPanel (QWidget * parent) :
     onFilterTypeChanged();
 }
 
-void FilterControlPanel::reset (dsp::signal input) {
-    onFilterParametersChanged();
+void FilterControlPanel::reset () {
+    m_lowerBoundSpinBox->blockSignals(true);
+    m_lowerBoundSpinBox->setValue(0.0);
+    m_lowerBoundSpinBox->blockSignals(false);
+
+    m_upperBoundSpinBox->blockSignals(true);
+    m_upperBoundSpinBox->setValue(0.0);
+    m_upperBoundSpinBox->blockSignals(false);
+
+    m_filterTypeCombo->setCurrentIndex(LOW_PASS_INDEX);
 }
 
 void FilterControlPanel::onFilterTypeChanged () {

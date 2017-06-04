@@ -11,11 +11,8 @@ class FilterPreview : public QChartView {
 
     public:
         FilterPreview       (dsp::signal input, QWidget * parent = nullptr);
-        ~FilterPreview      ();
 
     public slots:
-        void showLoading    ();
-        void hideLoading    ();
         void updateOutput   (dsp::signal output);
 
     private:
