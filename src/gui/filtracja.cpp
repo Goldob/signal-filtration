@@ -14,6 +14,8 @@ Filtracja::Filtracja (QWidget * parent) : QMainWindow(parent) {
 
     connect(m_ui->filterControlPanel, &FilterControlPanel::filterSet,
             this, &Filtracja::filterSignal);
+
+    updateTitle();
 }
 
 Filtracja::~Filtracja () {
@@ -34,7 +36,6 @@ void Filtracja::on_actionSaveAs_triggered () {
     QString fileName = QFileDialog::getSaveFileName(this, tr("Zapisz plik"));
 
     if (!fileName.isEmpty()) {
-        m_fileName = fileName;
         saveFile(fileName, m_output);
     }
 }
@@ -47,6 +48,20 @@ void Filtracja::cancelTask (Task * task_ptr) {
     task_ptr->blockSignals(true);
     m_globalThreadPool->cancel(task_ptr);
     delete task_ptr;
+}
+
+void Filtracja::updateTitle () {
+    QString title;
+
+    if (!m_fileName.isNull()) {
+        if (m_fileName.length() <= 30) title += m_fileName;
+        else title += m_fileName.left(27) + "...";
+
+        title += " - ";
+    }
+
+    title += "Filtracja";
+    setWindowTitle(title);
 }
 
 void Filtracja::readFile (QString fileName) {
@@ -100,6 +115,8 @@ void Filtracja::onFileReadSuccess (QString fileName, dsp::signal output) {
     }
 
     m_fileName = fileName;
+    updateTitle();
+
     m_input = output;
     m_output = output;
 
@@ -124,7 +141,10 @@ void Filtracja::onFileReadFailure (QString errorMessage) {
     delete m_readFileTask;
 }
 
-void Filtracja::onFileSaveSuccess () {
+void Filtracja::onFileSaveSuccess (QString fileName) {
+    m_fileName = fileName;
+    updateTitle();
+
     m_saveInProgress = false;
     delete m_saveFileTask;
 }

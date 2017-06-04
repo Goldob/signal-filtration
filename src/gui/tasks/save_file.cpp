@@ -8,7 +8,7 @@ SaveFileTask::SaveFileTask (QString fileName, dsp::signal input) {
 void SaveFileTask::run () {
     try {
         dsp::saveSignalToFile(m_fileName.toStdString(), m_input);
-        emit success();
+        emit success(m_fileName);
     } catch (SignalIOException e) {
         QString errorMessage = "Błąd przy zapisywaniu pliku ";
         errorMessage += m_fileName;

@@ -47,12 +47,13 @@ class Filtracja : public QMainWindow {
 
         void onFileReadSuccess          (QString fileName, dsp::signal output);
         void onFileReadFailure          (QString errorMessage);
-        void onFileSaveSuccess          ();
+        void onFileSaveSuccess          (QString fileName);
         void onFileSaveFailure          (QString errorMessage);
         void onSignalFiltered           (dsp::signal output);
 
     private:
         void cancelTask                 (Task * task_ptr);
+        void updateTitle                ();
 
         Ui::Filtracja       *   m_ui                    = new Ui::Filtracja;
         AboutDialog         *   m_aboutDialog           = new AboutDialog(this);

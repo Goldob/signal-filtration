@@ -31,8 +31,9 @@ class SaveFileTask : public Task {
     signals:
         /*!
          * \brief Ten sygnał zostaje wyemitowany, jeśli zapisywanie zakończy się sukcesem.
+         * \param Nazwa pliku docelowego.
          */
-        void success ();
+        void success (QString fileName);
 
         /*!
          * \brief Ten sygnał zostaje wyemitowany, jeśli przy zapisywaniu wystąpi błąd.
