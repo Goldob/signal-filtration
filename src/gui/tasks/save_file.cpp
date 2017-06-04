@@ -6,8 +6,23 @@ SaveFileTask::SaveFileTask (QString fileName, dsp::signal input) {
 }
 
 void SaveFileTask::run () {
-    // TODO Handle i/o errors
-    dsp::saveSignalToFile(m_fileName.toStdString(), m_input);
+    try {
+        dsp::saveSignalToFile(m_fileName.toStdString(), m_input);
+        emit success();
+    } catch (SignalIOException e) {
+        QString errorMessage = "Błąd przy zapisywaniu pliku ";
+        errorMessage += m_fileName;
+        errorMessage += ": \n";
 
-    emit success();
+        switch (e) {
+            case STREAM_NOT_OPEN:
+                errorMessage += "nie udało się otworzyć strumienia";
+                break;
+            default:
+                errorMessage += "wystąpił nieznany błąd";
+                break;
+        }
+
+        emit failure(errorMessage);
+    }
 }

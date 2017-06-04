@@ -41,7 +41,7 @@ class FilterControlPanel : public QWidget {
 
     public slots:
         /*!
-         * \brief reset Przywraca domyślne ustawienia filtra i emituje sygnał \c filterSet().
+         * \brief reset Przywraca domyślne ustawienia filtra i emituje sygnał \c filterSet.
          */
         void reset                      ();
 

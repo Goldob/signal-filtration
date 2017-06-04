@@ -133,7 +133,7 @@ void Filtracja::onFileSaveFailure (QString errorMessage) {
     QMessageBox::critical(this, CRITICAL_MSGBOX_TITLE, errorMessage);
 
     m_saveInProgress = false;
-    delete m_readFileTask;
+    delete m_saveFileTask;
 }
 
 void Filtracja::onSignalFiltered (dsp::signal output) {

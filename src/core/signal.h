@@ -2,6 +2,15 @@
 #ifndef SIGNAL_INCLUDED
 #define SIGNAL_INCLUDED
 
+#define NONPOSITIVE_FREQ_ERROR 0
+
+enum SignalIOException {
+    STREAM_NOT_OPEN,
+    NONPOSITIVE_FREQ,
+    NONPOSITIVE_SAMPLE_NUM,
+    PREMATURE_EOF
+};
+
 #include <string>
 
 #include "list.h"
