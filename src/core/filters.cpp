@@ -1,4 +1,4 @@
-#include "signal.h"
+#include "filters.h"
 #include "fourier.h"
 
 namespace dsp {
@@ -6,77 +6,89 @@ namespace dsp {
         return signal_freq.n * 2 * desired_freq / signal_freq.samplingFreq;
     }
 
-  void lowPassFilter (const signal in_signal,
-                      const freq freq_upperBound,
-                      signal& out_signal) {
-      dsp::signal_freqDomain signal_freq;
-      dsp::fourierTransform(in_signal, signal_freq);
+    filter lowPassFilter (const freq freq_upperBound) {
+        return [&](signal in_signal) -> signal {
+            dsp::signal_freqDomain signal_freq;
+            dsp::fourierTransform(in_signal, signal_freq);
 
-      int upperK = freqSampleNumber(signal_freq, freq_upperBound);
+            int upperK = freqSampleNumber(signal_freq, freq_upperBound);
 
-      for (int k = upperK; k < signal_freq.n; k++) {
-          signal_freq.realPart[k] = 0;
-          signal_freq.imPart[k] = 0;
-      }
+            for (int k = upperK; k < signal_freq.n; k++) {
+                signal_freq.realPart[k] = 0;
+                signal_freq.imPart[k] = 0;
+            }
 
-      dsp::inverseFourierTransform(signal_freq, out_signal);
-  }
+            signal out_signal;
+            dsp::inverseFourierTransform(signal_freq, out_signal);
 
-  void highPassFilter (const signal in_signal,
-                       const freq freq_lowerBound,
-                       signal& out_signal) {
-      dsp::signal_freqDomain signal_freq;
-      dsp::fourierTransform(in_signal, signal_freq);
+            return out_signal;
+        };
+    }
 
-      int lowerK = freqSampleNumber(signal_freq, freq_lowerBound);
+    filter highPassFilter (const freq freq_lowerBound) {
+        return [&](signal in_signal) -> signal {
+            dsp::signal_freqDomain signal_freq;
+            dsp::fourierTransform(in_signal, signal_freq);
 
-      for (int k = 0; k < std::min(lowerK, signal_freq.n); k++) {
-          signal_freq.realPart[k] = 0;
-          signal_freq.imPart[k] = 0;
-      }
+            int lowerK = freqSampleNumber(signal_freq, freq_lowerBound);
 
-      dsp::inverseFourierTransform(signal_freq, out_signal);
-  }
+            for (int k = 0; k < std::min(lowerK, signal_freq.n); k++) {
+                signal_freq.realPart[k] = 0;
+                signal_freq.imPart[k] = 0;
+            }
 
-  void bandPassFilter (const signal in_signal,
-                       const freq freq_lowerBound,
-                       const freq freq_upperBound,
-                       signal& out_signal) {
-      dsp::signal_freqDomain signal_freq;
-      dsp::fourierTransform(in_signal, signal_freq);
+            signal out_signal;
+            dsp::inverseFourierTransform(signal_freq, out_signal);
 
-      int lowerK = freqSampleNumber(signal_freq, freq_lowerBound);
+            return out_signal;
+        };
+    }
 
-      for (int k = 0; k < std::min(lowerK, signal_freq.n); k++) {
-          signal_freq.realPart[k] = 0;
-          signal_freq.imPart[k] = 0;
-      }
+    filter bandPassFilter (const freq freq_lowerBound,
+                           const freq freq_upperBound) {
+        return [&](signal in_signal) -> signal {
+            dsp::signal_freqDomain signal_freq;
+            dsp::fourierTransform(in_signal, signal_freq);
 
-      int upperK = freqSampleNumber(signal_freq, freq_upperBound);
+            int lowerK = freqSampleNumber(signal_freq, freq_lowerBound);
 
-      for (int k = upperK; k < signal_freq.n; k++) {
-          signal_freq.realPart[k] = 0;
-          signal_freq.imPart[k] = 0;
-      }
+            for (int k = 0; k < std::min(lowerK, signal_freq.n); k++) {
+                signal_freq.realPart[k] = 0;
+                signal_freq.imPart[k] = 0;
+            }
 
-      dsp::inverseFourierTransform(signal_freq, out_signal);
-  }
+            int upperK = freqSampleNumber(signal_freq, freq_upperBound);
 
-  void bandStopFilter (const signal in_signal,
-                       const freq freq_lowerBound,
-                       const freq freq_upperBound,
-                       signal& out_signal) {
-      dsp::signal_freqDomain signal_freq;
-      dsp::fourierTransform(in_signal, signal_freq);
+            for (int k = upperK; k < signal_freq.n; k++) {
+                signal_freq.realPart[k] = 0;
+                signal_freq.imPart[k] = 0;
+            }
 
-      int lowerK = freqSampleNumber(signal_freq, freq_lowerBound);
-      int upperK = freqSampleNumber(signal_freq, freq_upperBound);
+            signal out_signal;
+            dsp::inverseFourierTransform(signal_freq, out_signal);
 
-      for (int k = lowerK; k < std::min(upperK, signal_freq.n); k++) {
-          signal_freq.realPart[k] = 0;
-          signal_freq.imPart[k] = 0;
-      }
+            return out_signal;
+        };
+    }
 
-      dsp::inverseFourierTransform(signal_freq, out_signal);
-  }
+    filter bandStopFilter (const freq freq_lowerBound,
+                           const freq freq_upperBound) {
+        return [&](signal in_signal) -> signal {
+            dsp::signal_freqDomain signal_freq;
+            dsp::fourierTransform(in_signal, signal_freq);
+
+            int lowerK = freqSampleNumber(signal_freq, freq_lowerBound);
+            int upperK = freqSampleNumber(signal_freq, freq_upperBound);
+
+            for (int k = lowerK; k < std::min(upperK, signal_freq.n); k++) {
+                signal_freq.realPart[k] = 0;
+                signal_freq.imPart[k] = 0;
+            }
+
+            signal out_signal;
+            dsp::inverseFourierTransform(signal_freq, out_signal);
+
+            return out_signal;
+        };
+    }
 }

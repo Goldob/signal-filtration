@@ -25,8 +25,7 @@
 #include <functional>
 
 #include "signal.h"
-
-typedef std::function<dsp::signal (dsp::signal)> filter;
+#include "filters.h"
 
 class FilterControlPanel : public QWidget {
     Q_OBJECT
@@ -56,7 +55,7 @@ class FilterControlPanel : public QWidget {
         QLabel          * m_upperBoundHertzLabel    = new QLabel(HERTZ_LABEL);
 
     signals:
-        void filterSet                  (filter newFilter);
+        void filterSet                  (dsp::filter newFilter);
 };
 
 #endif /* !FILTER_CONTROL_PANEL_INCLUDED */

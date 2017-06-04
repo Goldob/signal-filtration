@@ -1,8 +1,9 @@
 #include "filter_signal.h"
+#include "filters.h"
 
-FilterSignalTask::FilterSignalTask (dsp::signal input, filter _filter) {
+FilterSignalTask::FilterSignalTask (dsp::signal input, dsp::filter filter) {
     m_input = input;
-    m_filter = _filter;
+    m_filter = filter;
 }
 
 void FilterSignalTask::run () {

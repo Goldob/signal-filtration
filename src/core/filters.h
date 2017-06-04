@@ -2,56 +2,47 @@
 #ifndef FILTERS_INCLUDED
 #define FILTERS_INCLUDED
 
+#include <functional>
+
 #include "signal.h"
 
 namespace dsp {
     /*!
-     * \brief Przeprowadź filtrację niskoprzepustową zadanego sygnału.
+     * \brief Abstrakcja filtra w postaci funkcji sygnału wyjściowego od wejściowego.
+     */
+    typedef std::function<signal(signal)> filter;
+
+    /*!
+     * \brief Zwraca nową instancję filtra dolnoprzepustowego.
      *
-     * \param in_signal Sygnał wejściowy.
      * \param freq_upperBound Górna granica zakresu przepuszczanych częstotliwości.
-     * \param out_signal Sygnał wyjściowy po filtracji, przekazany przez referencję.
      */
-    void lowPassFilter (const signal in_signal,
-                        const freq freq_upperBound,
-                        signal& out_signal);
+    filter lowPassFilter (const freq freq_upperBound);
 
     /*!
-     * \brief Przeprowadź filtrację wysokoprzepustową zadanego sygnału.
+     * \brief Zwraca nową instancję filtra górnoprzepustowego.
      *
-     * \param in_signal Sygnal wejściowy.
      * \param freq_lowerBound Dolna granica zakresu przepuszczanych częstotliwości.
-     * \param out_signal Sygnał wyjściowy po filtracji, przekazany przez referencję.
      */
-    void highPassFilter (const signal in_signal,
-                         const freq freq_lowerBound,
-                         signal& out_signal);
+    filter highPassFilter (const freq freq_lowerBound);
 
     /*!
-     * \brief Przeprowadź filtrację środkowoprzepustową zadanego sygnału.
+     * \brief Zwraca nową instancję filtra środkowoprzepustowego.
      *
-     * \param in_signal Sygnał wejściowy.
      * \param freq_lowerBound Dolna granica zakresu przepuszczanych częstotliwości.
      * \param freq_upperBound Górna granica zakresu przepuszczanych częstotliwości.
-     * \param out_signal Sygnał wyjściowy po filtracji, przekazany przez referencję.
      */
-    void bandPassFilter (const signal in_signal,
-                         const freq freq_lowerBound,
-                         const freq freq_upperBound,
-                         signal& out_signal);
+    filter bandPassFilter (const freq freq_lowerBound,
+                           const freq freq_upperBound);
 
     /*!
-     * \brief Przeprowadź filtrację środkowozaporową zadanego sygnału.
+     * \brief Zwraca nową instancję filtra środkowozaporowego.
      *
-     * \param in_signal Sygnał wejściowy.
      * \param freq_lowerBound Dolna granica zakresu blokowanych częstotliwości.
      * \param freq_upperBound Górna granica zakresu blokowanych częstotliwości.
-     * \param out_signal Sygnał wyjściowy po filtracji, przekazany przez referencję.
      */
-    void bandStopFilter (const signal in_signal,
-                         const freq freq_lowerBound,
-                         const freq freq_upperBound,
-                         signal& out_signal);
+    filter bandStopFilter (const freq freq_lowerBound,
+                           const freq freq_upperBound);
 }
 
 #endif /* !FILTERS_INCLUDED */

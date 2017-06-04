@@ -8,8 +8,8 @@
 #define DESC_IN_FILENAME "Sciezka pliku wejsciowego"
 #define DESC_OUT_FILENAME "Sciezka pliku wyjsciowego"
 #define DESC_FILTER_TYPE "Rodzaj filtra (lp, hp, bp, bs)"
-#define DESC_UPPER_BOUND "Dolna granica czestotliwosci [Hz]"
-#define DESC_LOWER_BOUND "Gorna granica czestotliwosci [Hz]"
+#define DESC_LOWER_BOUND "Dolna granica czestotliwosci [Hz]"
+#define DESC_UPPER_BOUND "Gorna granica czestotliwosci [Hz]"
 
 #define ERR_INVALID_FILTER "Niepoprawny rodzaj filtra!"
 #define ERR_NONPOSITIVE_FREQ "Czestotliwosc musi byc wieksza od zera!"
@@ -23,7 +23,6 @@
 using namespace std;
 
 enum filter_type {
-    UNDEFINED,
     LOW_PASS,
     HIGH_PASS,
     BAND_PASS,
@@ -36,9 +35,9 @@ bool parseFilterCode (const string in_filterCode,
     else if (in_filterCode == "hp") out_filterType = HIGH_PASS;
     else if (in_filterCode == "bp") out_filterType = BAND_PASS;
     else if (in_filterCode == "bs") out_filterType = BAND_STOP;
-    else out_filterType = UNDEFINED;
+    else return false;
 
-    return out_filterType != UNDEFINED;
+    return true;
 }
 
 int main () {
@@ -56,7 +55,6 @@ int main () {
                ERR_INVALID_FILTER);
 
     dsp::signal in_signal;
-    dsp::signal out_signal;
 
     // Wczytaj sygnał wejściowy z pliku
     dsp::readSignalFromFile(in_fileName, in_signal);
@@ -64,7 +62,9 @@ int main () {
     dsp::freq freq_lowerBound;
     dsp::freq freq_upperBound;
 
-    // Wywołaj odpowiedni algorytm w zależności od wybranego filtra
+    dsp::filter myFilter;
+
+    // Wczytaj odpowiednie parametry w zależności od wybranego filtra
     switch (filterType) {
     case LOW_PASS:
         READ_INPUT(freq_upperBound,
@@ -72,9 +72,7 @@ int main () {
                    freq_upperBound > 0,
                    ERR_NONPOSITIVE_FREQ);
 
-        dsp::lowPassFilter(in_signal,
-                           freq_upperBound,
-                           out_signal);
+        myFilter = dsp::lowPassFilter(freq_upperBound);
         break;
     case HIGH_PASS:
         READ_INPUT(freq_lowerBound,
@@ -82,13 +80,11 @@ int main () {
                    freq_lowerBound > 0,
                    ERR_NONPOSITIVE_FREQ);
 
-        dsp::highPassFilter(in_signal,
-                            freq_lowerBound,
-                            out_signal);
+        myFilter = dsp::highPassFilter(freq_lowerBound);
         break;
     case BAND_PASS:
         READ_INPUT(freq_lowerBound,
-                   DESC_UPPER_BOUND,
+                   DESC_LOWER_BOUND,
                    freq_lowerBound > 0,
                    ERR_NONPOSITIVE_FREQ);
 
@@ -97,14 +93,12 @@ int main () {
                    freq_upperBound > 0,
                    ERR_NONPOSITIVE_FREQ);
 
-        dsp::bandPassFilter(in_signal,
-                            freq_lowerBound,
-                            freq_upperBound,
-                            out_signal);
+        myFilter = dsp::bandPassFilter(freq_lowerBound,
+                                       freq_upperBound);
         break;
     case BAND_STOP:
         READ_INPUT(freq_lowerBound,
-                   DESC_UPPER_BOUND,
+                   DESC_LOWER_BOUND,
                    freq_lowerBound > 0,
                    ERR_NONPOSITIVE_FREQ);
 
@@ -113,13 +107,11 @@ int main () {
                    freq_upperBound > 0,
                    ERR_NONPOSITIVE_FREQ);
 
-        dsp::bandStopFilter(in_signal,
-                            freq_lowerBound,
-                            freq_upperBound,
-                            out_signal);
-       break;
+        myFilter = dsp::bandStopFilter(freq_lowerBound,
+                                       freq_upperBound);
+        break;
     }
 
-    // Zapisz sygnał wyjściowy do pliku
-    dsp::saveSignalToFile(out_fileName, out_signal);
+    // Przeprowadź filtrację i zapisz sygnał wyjściowy do pliku
+    dsp::saveSignalToFile(out_fileName, myFilter(in_signal));
 }

@@ -4,19 +4,18 @@
 
 #include "task.h"
 #include "signal.h"
-
-typedef std::function<dsp::signal (dsp::signal)> filter;
+#include "filters.h"
 
 class FilterSignalTask : public Task {
     Q_OBJECT
 
     public:
-        FilterSignalTask (dsp::signal input, filter _filter);
+        FilterSignalTask (dsp::signal input, dsp::filter filter);
         void run ();
 
     private:
         dsp::signal m_input;
-        filter m_filter;
+        dsp::filter m_filter;
 
     signals:
         void done (dsp::signal output);

@@ -10,6 +10,7 @@
 
 #include "about_dialog.h"
 #include "signal.h"
+#include "filters.h"
 
 #include "tasks/task.h"
 #include "tasks/read_file.h"
@@ -19,8 +20,6 @@
 #include "widgets/welcome_screen.h"
 #include "widgets/filter_control_panel.h"
 #include "widgets/filter_preview.h"
-
-typedef std::function<dsp::signal (dsp::signal)> filter;
 
 class Filtracja : public QMainWindow {
     Q_OBJECT
@@ -36,8 +35,8 @@ class Filtracja : public QMainWindow {
         void on_actionAbout_triggered   ();
 
         void readFile                   (QString fileName);
-        void saveFile                   (QString fileName,dsp::signal input);
-        void filterSignal               (filter _filter);
+        void saveFile                   (QString fileName, dsp::signal input);
+        void filterSignal               (dsp::filter filter);
 
         void onFileReadSuccess          (QString fileName, dsp::signal output);
         void onFileReadFailure          (QString errorMessage);

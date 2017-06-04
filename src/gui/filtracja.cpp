@@ -78,10 +78,10 @@ void Filtracja::saveFile (QString fileName, dsp::signal input) {
     m_saveInProgress = true;
 }
 
-void Filtracja::filterSignal(filter _filter) {
+void Filtracja::filterSignal(dsp::filter filter) {
     if (m_filteringInProgress) cancelTask(m_filterSignalTask);
 
-    m_filterSignalTask = new FilterSignalTask(m_input, _filter);
+    m_filterSignalTask = new FilterSignalTask(m_input, filter);
 
     connect(m_filterSignalTask, &FilterSignalTask::done,
             this, &Filtracja::onSignalFiltered);
