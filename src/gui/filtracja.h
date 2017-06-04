@@ -21,10 +21,17 @@
 #include "widgets/filter_control_panel.h"
 #include "widgets/filter_preview.h"
 
+/*!
+ * \brief Filtracja jest głównym oknem programu. Odpowiada za zarządzanie poszczególnymi komponentami.
+ */
 class Filtracja : public QMainWindow {
     Q_OBJECT
 
     public:
+        /*!
+         * \brief Tworzy nową instancję okna.
+         * \param parent
+         */
         explicit Filtracja              (QWidget * parent = nullptr);
         ~Filtracja                      ();
 

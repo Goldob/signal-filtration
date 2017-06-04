@@ -11,7 +11,7 @@ namespace dsp {
     typedef double sample;  //!< Ogólnie rozumiana próbka sygnału. Może byc interpretowana dowolnie w zależnosci od zastosowania.
 
     /*!
-     * \brief Struktura \b signal, będąca standardową reprezentacją sygnału w domenie czasu.
+     * \brief Struktura \c signal jest standardową reprezentacją sygnału w domenie czasu.
      */
     struct signal {
         freq samplingFreq;      //!< Częstotliowość próbkowania - ilość próbek na sekundę.

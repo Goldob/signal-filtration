@@ -13,6 +13,7 @@
 
 /*!
  * \namespace dsp
- * \brief Przestrzeń nazw wykorzystywana w obrębie programu.
- *        Nazwa wywodzi się z angielskiego określenia \e Digital Signal Processing.
+ * \brief Przestrzeń nazw ze strukturami danych i algorytmami przetwarzania sygnałów
+ *        wykorzystywanymi w obrębie programu.
+ *        Nazwa wywodzi się z angielskiego określenia \e Digital \e Signal \e Processing.
  */

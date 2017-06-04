@@ -6,13 +6,25 @@
 
 #include "signal.h"
 
+/*!
+ * \brief Klasa FilterPreview jest widgetem wyświetlającym podgląd sygnału w formie wykresu.
+ */
 class FilterPreview : public QChartView {
     Q_OBJECT
 
     public:
+        /*!
+         * \brief Tworzy nową instancję widgetu przypisaną do sygnału wejściowego (\a input).
+         * \param input Sygnał wejściowy
+         * \param parent
+         */
         FilterPreview       (dsp::signal input, QWidget * parent = nullptr);
 
     public slots:
+        /*!
+         * \brief Aktualizuje wykres sygnału wyjściowego.
+         * \param output Sygnał wyjściowy po nałożeniu filtra.
+         */
         void updateOutput   (dsp::signal output);
 
     private:

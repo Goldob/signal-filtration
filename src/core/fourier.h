@@ -6,7 +6,7 @@
 
 namespace dsp {
   /*!
-   * \brief Struktura \b signal_freqDomain, będaca reprezentacją sygnału
+   * \brief Struktura \c signal_freqDomain jest reprezentacją sygnału
    *        w dziedzinie częstotliwości.
    */
   struct signal_freqDomain {

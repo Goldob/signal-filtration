@@ -8,10 +8,17 @@ namespace Ui {
     class AboutDialog;
 }
 
+/*!
+ * \brief AboutDialog jest okienkiem z podstawowymi informacjami o programie.
+ */
 class AboutDialog : public QDialog {
     Q_OBJECT
 
     public:
+        /*!
+         * \brief Tworzy nową instancję okienka.
+         * \param parent
+         */
         explicit AboutDialog (QWidget *parent = nullptr);
         ~AboutDialog ();
 

@@ -52,27 +52,4 @@ Project {
         Depends { name: 'Qt.widgets' }
         Depends { name: 'Qt.charts' }
     }
-
-    // TODO Wykonaj testy
-    Product {
-        name: 'Testy'
-
-        files: [
-            'test/fourier_test.cpp',
-            'test/filters_test.cpp'
-        ].concat(Config.CORE_FILES)
-
-        cpp.includePaths: [ Config.CORE_PATH ]
-
-        Depends { name: 'Qt.testlib' }
-    }
-
-    // TODO Zbuduj dokumentację
-    Product {
-        name: 'Dokumentacja'
-
-        files: [
-            'src/core/dsp.h'
-        ]
-    }
 }

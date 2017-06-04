@@ -27,13 +27,22 @@
 #include "signal.h"
 #include "filters.h"
 
+/*!
+ * \brief FilterControlPanel jest widgetem umożliwiającym wybór filtra i jego parametrów.
+ */
 class FilterControlPanel : public QWidget {
     Q_OBJECT
 
     public:
+        /*!
+         * \brief Tworzy nową instancję widgetu.
+         */
         FilterControlPanel              (QWidget * parent = nullptr);
 
     public slots:
+        /*!
+         * \brief reset Przywraca domyślne ustawienia filtra i emituje sygnał \c filterSet().
+         */
         void reset                      ();
 
     private slots:
@@ -55,6 +64,10 @@ class FilterControlPanel : public QWidget {
         QLabel          * m_upperBoundHertzLabel    = new QLabel(HERTZ_LABEL);
 
     signals:
+        /*!
+         * \brief Ten sygnał zostaje wyemitowany, gdy ustawienia filtra zmienią się.
+         * \param filter Filtr do nałożenia na sygnał.
+         */
         void filterSet                  (dsp::filter filter);
 };
 

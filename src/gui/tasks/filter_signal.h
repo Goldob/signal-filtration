@@ -6,11 +6,23 @@
 #include "signal.h"
 #include "filters.h"
 
+/*!
+ * \brief Klasa FilterSignalTask reprezentuje asynchroniczne zadanie filtracji sygnału.
+ */
 class FilterSignalTask : public Task {
     Q_OBJECT
 
     public:
+        /*!
+         * \brief Tworzy nową instancję zadania ze wskazanymi parametrami.
+         * \param input Sygnał wejściowy.
+         * \param filter Filtr do nałożenia na syngał.
+         */
         FilterSignalTask (dsp::signal input, dsp::filter filter);
+
+        /*!
+         * \brief Wykonuje zadaną filtrację sygnału i po jej zakończeniu emituje sygnał \c done.
+         */
         void run ();
 
     private:
@@ -18,6 +30,10 @@ class FilterSignalTask : public Task {
         dsp::filter m_filter;
 
     signals:
+        /*!
+         * \brief Ten sygnał zostaje wyemitowany po zakończeniu filtracji.
+         * \param output Sygnał wyjściowy.
+         */
         void done (dsp::signal output);
 };
 

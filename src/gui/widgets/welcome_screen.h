@@ -11,10 +11,17 @@
 #include <QDragEnterEvent>
 #include <QDropEvent>
 
+/*!
+ * \brief WelcomeScreen jest widgetem ekranu powitalnego, który wyświetla się przy uruchomieniu programu.
+ *        Umożliwia otwieranie plików metodą \e drag&drop.
+ */
 class WelcomeScreen : public QWidget {
     Q_OBJECT
 
     public:
+        /*!
+         * \brief Tworzy nową instancję widgetu.
+         */
         WelcomeScreen           (QWidget * parent = nullptr);
 
     private:
@@ -22,10 +29,15 @@ class WelcomeScreen : public QWidget {
         QLabel      * m_label           = new QLabel(MAIN_LABEL);
 
     protected:
-        void dragEnterEvent     (QDragEnterEvent * event);
-        void dropEvent          (QDropEvent * event);
+        void dragEnterEvent     (QDragEnterEvent * event);  //!< \private
+        void dropEvent          (QDropEvent * event);       //!< \private
 
     signals:
+        /*!
+         * \brief Ten sygnał zostaje wyemitowany, gdy w obszarze widgetu zostanie
+         *        upuszczony plik.
+         * \param fileName Nazwa pliku.
+         */
         void fileDropped        (QString fileName);
 };
 
