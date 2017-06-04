@@ -103,13 +103,12 @@ void Filtracja::onFileReadSuccess (QString fileName, dsp::signal output) {
     m_input = output;
     m_output = output;
 
-    m_ui->filterControlPanel->reset();
     m_filterPreview = new FilterPreview(output, this);
+    m_ui->filterControlPanel->setEnabled(true);
+    m_ui->filterControlPanel->reset();
 
     m_ui->mainArea->addWidget(m_filterPreview);
     m_ui->mainArea->setCurrentWidget(m_filterPreview);
-
-    m_ui->filterControlPanel->setEnabled(true);;
 
     m_ui->actionSave->setEnabled(true);
     m_ui->actionSaveAs->setEnabled(true);

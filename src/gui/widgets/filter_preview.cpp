@@ -15,7 +15,6 @@ FilterPreview::FilterPreview (dsp::signal input, QWidget * parent) :
     m_inputSeries->setName(INPUT_SIGNAL);
     m_inputSeries->setColor(Qt::lightGray);
 
-    encodeSignal(input, m_outputSeries);
     m_outputSeries->setName(OUTPUT_SIGNAL);
 
     m_chart->addSeries(m_inputSeries);

@@ -38,6 +38,10 @@ FilterControlPanel::FilterControlPanel (QWidget * parent) :
 }
 
 void FilterControlPanel::reset () {
+    m_filterTypeCombo->blockSignals(true);
+    m_filterTypeCombo->setCurrentIndex(LOW_PASS_INDEX);
+    m_filterTypeCombo->blockSignals(false);
+
     m_lowerBoundSpinBox->blockSignals(true);
     m_lowerBoundSpinBox->setValue(0.0);
     m_lowerBoundSpinBox->blockSignals(false);
@@ -46,7 +50,7 @@ void FilterControlPanel::reset () {
     m_upperBoundSpinBox->setValue(0.0);
     m_upperBoundSpinBox->blockSignals(false);
 
-    m_filterTypeCombo->setCurrentIndex(LOW_PASS_INDEX);
+    onFilterTypeChanged();
 }
 
 void FilterControlPanel::onFilterTypeChanged () {
