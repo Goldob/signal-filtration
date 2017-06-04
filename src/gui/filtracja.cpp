@@ -1,5 +1,7 @@
 #define CRITICAL_MSGBOX_TITLE "Wystąpił błąd"
 
+#define FILE_FILTER tr("Pliki sygnałów (*.signal);;Wszystkie pliki (*)")
+
 #include <QFileDialog>
 #include <QMessageBox>
 
@@ -23,7 +25,8 @@ Filtracja::~Filtracja () {
 }
 
 void Filtracja::on_actionOpen_triggered () {
-    QString fileName = QFileDialog::getOpenFileName(this, "Otwórz plik");
+    QString fileName = QFileDialog::getOpenFileName(this,tr("Otwórz plik"),
+                                                    QString(), FILE_FILTER);
 
     if (!fileName.isEmpty()) readFile(fileName);
 }
@@ -33,7 +36,8 @@ void Filtracja::on_actionSave_triggered () {
 }
 
 void Filtracja::on_actionSaveAs_triggered () {
-    QString fileName = QFileDialog::getSaveFileName(this, tr("Zapisz plik"));
+    QString fileName = QFileDialog::getSaveFileName(this, tr("Zapisz plik"),
+                                                    QString(), FILE_FILTER);
 
     if (!fileName.isEmpty()) {
         saveFile(fileName, m_output);
